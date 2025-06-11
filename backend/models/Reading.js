@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-const ReadingSchema = new mongoose.Schema({
-  value: Number,
-  unit: { type: String, default: 'μSv/h' },
-  timestamp: { type: Date, default: Date.now },
-  location: String,
-  sensorId: String
+
+const readingSchema = new mongoose.Schema({
+  value: { type: Number, required: true }, // µSv/h
+  timestamp: { type: Date, default: Date.now }
 });
-module.exports = mongoose.model('Reading', ReadingSchema);
+
+module.exports = mongoose.model('Reading', readingSchema);
