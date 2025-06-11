@@ -5,7 +5,7 @@ const http = require('http');
 const WebSocket = require('ws');
 const readingsRoute = require('./routes/readings');
 const authRoute = require('./routes/auth');
-
+const cors = require('cors');
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
@@ -25,6 +25,7 @@ function broadcast(data) {
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 app.use('/api/auth', authRoute);
 app.use('/api/readings', (req, res, next) => {
   const origSend = res.send.bind(res);
