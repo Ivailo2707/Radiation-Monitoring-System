@@ -18,7 +18,17 @@ const rateLimit = require('express-rate-limit');
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',       
+    'http://frontend:3000',        
+    'http://your-production-domain.com' 
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
+
+
 app.use('/api/auth', authRoute);
 app.use('/api/readings', (req, res, next) => {
   const origSend = res.send.bind(res);
