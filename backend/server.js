@@ -13,18 +13,8 @@ const wss = new WebSocket.Server({ server });
 const {SerialPort} = require('serialport');
 const {ReadlineParser} = require('@serialport/parser-readline');
 const {Reading} = require('./models/Reading');
+const rateLimit = require('express-rate-limit');
 
-let sockets = [];
-wss.on('connection', socket => {
-  sockets.push(socket);
-  socket.on('close', () => {
-    sockets = sockets.filter(s => s !== socket);
-  });
-});
-
-function broadcast(data) {
-  sockets.forEach(s => s.send(JSON.stringify(data)));
-}
 
 // Middleware
 app.use(express.json());
@@ -63,6 +53,23 @@ parser.on('data', async (data) => {
     console.warn('Invalid data from serial:', data);
   }
 });
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, 
+  max: 100, 
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use(apiLimiter);
+app.use('/api/auth', authLimiter);
 
 
 // MongoDB connection
