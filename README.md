@@ -2,25 +2,24 @@
 
 Project goal definition:
     Web based application with the following functionalities:
-        Continuously monitors radiation levels via Geiger counter connected to Raspberry Pi 5
+        Continuously monitors radiation levels via Geiger counter connected to Arduino UNO
         Provides real-time visualization of radiation data (μSv/h)
-        Triggers both audible and visual alarms when certain thresholds are exceeded
+        Triggers visual alarms when certain thresholds are exceeded
         Stores historical data for analysis
         Secures access through user authentication
 
     Key objectives:
         Safety Monitoring: Immediate detection of dangerous radiation levels
         Data Recording: Long-term tracking of radiation exposure
-        Access Control: Secure system access for authorized personnel
+        Access Control: Secure system access
         Alert System: Immediate notification of hazards
 
 Technical Stack
-    Frontend: React.js
+    Frontend: NextJS
     Backend: Node.js/Express
     Database: MongoDB
-    Hardware: RPi5 + Geiger counter
+    Hardware: Arduino UNO + Geiger counter
     Containerization: Docker
-    Deployment: Terraform
 
 
 User stories:
@@ -81,6 +80,6 @@ Use cases:
             Frontend renders chart
 
 System architecture overview:
-[Geiger Counter] → [RPi5 (Python)] → [Node.js Backend] → [MongoDB]
-                                     ↑
-[React Frontend] ←-------------------↓
+[Geiger Counter] → [Arduino UNO] → [Node.js Backend] → [MongoDB]
+                                      ↑
+[NextJS Frontend] ←-------------------↓

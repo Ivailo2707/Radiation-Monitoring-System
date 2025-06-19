@@ -1,8 +1,7 @@
 # Technology Justification
 
 ## Frontend
-- **React.js**: Component-based architecture ideal for real-time dashboards
-- **Chart.js**: Lightweight for radiation trend visualization
+- **NextJS**: Component-based architecture ideal for real-time dashboards
 - **WebSocket**: Real-time data updates without polling
 
 ## Backend
@@ -11,5 +10,5 @@
 - **JWT**: Secure authentication for nuclear facility access
 
 ## Hardware
-- **Python**: Best RPi GPIO/serial library support
-- **Docker**: Containerized deployment across RPi/cloud
+- **Arduino UNO**: QOF web integration
+- **Docker**: Containerized deployment

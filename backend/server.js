@@ -42,27 +42,27 @@ app.use('/api/readings', (req, res, next) => {
   next();
 }, readingsRoute);
 
-const port = new SerialPort({
-  path: 'COM8',
-  baudRate: 9600
-});
+// const port = new SerialPort({
+//   path: 'COM8',
+//   baudRate: 9600
+// });
 
-const parser = port.pipe(new ReadlineParser({ delimiter: '\n' }));
+// const parser = port.pipe(new ReadlineParser({ delimiter: '\n' }));
 
-parser.on('data', async (data) => {
-  const value = parseFloat(data.trim());
-  if (!isNaN(value)) {
-    const reading = new Reading({ value, timestamp: new Date() });
-    await reading.save();
-    broadcast({
-      value,
-      timestamp: reading.timestamp,
-      alarm: value >= 0.3
-    });
-  } else {
-    console.warn('Invalid data from serial:', data);
-  }
-});
+// parser.on('data', async (data) => {
+//   const value = parseFloat(data.trim());
+//   if (!isNaN(value)) {
+//     const reading = new Reading({ value, timestamp: new Date() });
+//     await reading.save();
+//     broadcast({
+//       value,
+//       timestamp: reading.timestamp,
+//       alarm: value >= 0.3
+//     });
+//   } else {
+//     console.warn('Invalid data from serial:', data);
+//   }
+// });
 
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, 
